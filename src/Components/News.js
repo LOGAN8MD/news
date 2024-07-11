@@ -71,6 +71,8 @@ export class News extends Component {
                     <button disabled={page + 1 > Math.ceil(totalResults / this.props.pageSize)} type="button" className="btn btn-dark" onClick={this.handleNextClick}>Next&rarr;</button>
                 </div>
                 <div className='row'>
+                    {console.log(articles.length)}
+                    {console.log("Deepak")}
                     {articles.length > 0 ? (
                         articles.map((element) => (
                             <div className="col-md-4" key={element.url}>
