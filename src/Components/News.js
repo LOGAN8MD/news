@@ -60,17 +60,19 @@ export class News extends Component {
     }
 
     render() {
+        const { articles, loading, page, totalResults } = this.state;
+
         return (
             <div className='container my-3'>
                 <h1 className='text-center' style={{ margin: '35px 0px', marginTop: '50px' }}>newsOnTips - Top {this.capFirstLetter(this.props.category)}  Headlines</h1>
-                {this.state.loading && <Spinner />}
+                {loading && <Spinner />}
                 <div className='container d-flex justify-content-between'>
-                    <button disabled={this.state.page <= 1} type="button" className="btn btn-dark" onClick={this.handlePrevClick}>&larr;Previous</button>
-                    <button disabled={this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)} type="button" className="btn btn-dark" onClick={this.handleNextClick}>Next&rarr;</button>
+                    <button disabled={page <= 1} type="button" className="btn btn-dark" onClick={this.handlePrevClick}>&larr;Previous</button>
+                    <button disabled={page + 1 > Math.ceil(totalResults / this.props.pageSize)} type="button" className="btn btn-dark" onClick={this.handleNextClick}>Next&rarr;</button>
                 </div>
                 <div className='row'>
-                    {!this.state.loading && this.state.articles.length > 0 ? (
-                        this.state.articles.map((element) => (
+                    {articles.length > 0 ? (
+                        articles.map((element) => (
                             <div className="col-md-4" key={element.url}>
                                 <NewsItem
                                     title={element.title ? element.title : ""}
@@ -88,8 +90,8 @@ export class News extends Component {
                     )}
                 </div>
                 <div className='container d-flex justify-content-between'>
-                    <button disabled={this.state.page <= 1} type="button" className="btn btn-dark" onClick={this.handlePrevClick}>&larr;Previous</button>
-                    <button disabled={this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)} type="button" className="btn btn-dark" onClick={this.handleNextClick}>Next&rarr;</button>
+                    <button disabled={page <= 1} type="button" className="btn btn-dark" onClick={this.handlePrevClick}>&larr;Previous</button>
+                    <button disabled={page + 1 > Math.ceil(totalResults / this.props.pageSize)} type="button" className="btn btn-dark" onClick={this.handleNextClick}>Next&rarr;</button>
                 </div>
             </div>
         )
