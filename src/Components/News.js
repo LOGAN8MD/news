@@ -38,14 +38,20 @@ export class News extends Component {
         try {
             let data = await fetch(url);
             let parsedData = await data.json();
+            console.log("API Response:", parsedData); // Debugging API response
+
+            if (!parsedData.articles) {
+            throw new Error("No articles found in response");
+        }
+            
             this.setState({
-                articles: parsedData.articles,
-                totalResults: parsedData.totalResults,
+                articles: parsedData.articles || [],
+                totalResults: parsedData.totalResults || 0,
                 loading: false
             });
         } catch (error) {
             console.error('Error fetching data:', error);
-            this.setState({ loading: false });
+            this.setState({ articles: [], loading: false });
         }
     }
 
